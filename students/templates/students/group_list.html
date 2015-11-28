@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block nav_class_index %} active {% endblock %}
+
+
+{% load staticfiles %}
+
+{% block container %}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% comment %}    {% for article in articles %}
+
+        <div class="well">
+            <h6> Дата публикации: {{ article.article_date|date:"d N Y" }} </h6>
+
+            <h3>{{ article.article_title }}</h3>
+
+            <div class="tags"> <span class="glyphicon glyphicon-tags"></span>
+                {% for tag in article.article_tags.all %} <!-- делаем проход по нашим тегам -->
+                    <a href="{% url 'tag' tag.id %}"> {{ tag }} </a> <!-- выводим их на экран -->
+                            <!-- ставим между тегами запятые -->
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <p>{{ article.article_short_description|markdown }}</p>
+            <p>
+                <a href="{% url 'articles:add_like' article.id %}">
+                    <img class="pull-left" src="{% static 'img/likes.jpg' %}" width="17" height="17">
+                </a>
+                <small> {{ article.article_likes }} </small>
+
+                <a class="btn btn-primary pull-right" href="{% url 'articles:article_detail' article.id %}" role="button">
+                    Read more...</a>
+            </p>
+        </div>
+    {% endfor %}
+    {% endcomment %}
+
+    <div class="pagination pagination-lg">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"> previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                   <span class="current"><b>{{ num }}</b></span>
+                {% else %}
+                    <a href="?page={{ num }}"> {{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="well-sm">
+    <p> Test test test </p>
+    </div>
+
+{% endblock container %}
+
+

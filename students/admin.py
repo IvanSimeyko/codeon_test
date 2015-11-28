@@ -1,5 +1,5 @@
 from django.contrib import admin
-from students.models import Student
+from students.models import Student, Group
 
 
 class StudentAdmin(admin.ModelAdmin):
@@ -10,4 +10,11 @@ class StudentAdmin(admin.ModelAdmin):
     #filter_horizontal = ('student_group',)
 
 
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ['title', 'starosta']
+    search_fields = ['title', 'starosta']
+    list_filter = ['title', 'starosta']
+
+
 admin.site.register(Student, StudentAdmin)
+admin.site.register(Group, GroupAdmin)

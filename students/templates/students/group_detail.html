@@ -4,90 +4,68 @@
 {% load staticfiles %}
 
 
-{% block title %} {{ course.name }} {% endblock title %}
-
-
-{% block students_link %}{% url 'students:students_of_the_course' %}?course_id={{ course.id }}{% endblock %}
+{% block title %} {{ group.title }} {% endblock title %}
 
 
 {% block container %}
 
-
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} >
-        {{ message }}
-      </div>
-    {% endfor %}
-  </ul>
-{% endif %}
-
-  <div class="container">
-      <div class="jumbotron">
-          <h1 >{{ course.name }}</h1>
-          <p>{{ course.description }}</p>
-      </div>
-  </div>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} >
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 
-  <div class="table-responsive">
-      <table class="table table-hover">
-          <h2 align='center'>Преподаватели курса</h2>
-          <thead>
-              <tr>
-                  <th>Преподаватели курса</th>
-                  <th>Достижения</th>
-              </tr>
-          </thead>
-          <tbody>
-               <tr>
-                   {% if course.instructor %}
-                   <td><a href="{% url 'coaches:coach_info' course.instructor.id %}">{{ course.instructor }}</a></td>
-                   <td>{{ course.instructor.description }}</td>
-                   {% endif %}
-               </tr>
-               <tr>
-                   {% if course.assistant %}
-                   <td> <a href="{% url 'coaches:coach_info' course.assistant.id %}">{{ course.assistant }} </a></td>
-                   <td>{{ course.assistant.description }}</td>
-                   {% endif %}
-               </tr>
-
-          </tbody>
-      </table>
-  </div>
+    <div class="container-fluid">
+        <div class="well">
+            <h2 >{{ group.title }}</h2>
+            <p>{{ group.notes }}</p>
+        </div>
+    </div>
 
 
+    <div class="table-responsive">
+        <table class="table table-hover">
 
-  <div class="table-responsive">
-      <table class="table table-hover">
-          <h2 align='center'> План курса </h2>
+            <h2 class="text-center"> Студенты курса {{ group.title }}</h2>
 
-          <a class="btn btn-primary active"
-          href="{% url 'courses:add_lesson' course.id %}" role="button">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          Добавить занятие
-          </a>
+            <a class="btn btn-primary btn-sm" href="#" role="button">
+                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                       Добавить студента
+            </a>
 
-          <thead>
-              <tr>
-                  <th>#</th>
-                  <th>Тема</th>
-                  <th>Описание</th>
-              </tr>
-          </thead>
-          <tbody>
-              {% for lesson in lessons %}
-                  <tr>
-                      <td> {{ lesson.number }}</td>
-                      <td> {{ lesson.theme|default:"Тема отсутствует"  }}</td>
-                      <td>{{ lesson.description|truncatechars:50 }}</td>
-                  </tr>
-              {% endfor %}
-          </tbody>
-      </table>
-  </div>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th> Фото </th>
+                    <th> Имя </th>
+                    <th> Фамилия </th>
+                    <th> Дата рождения </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td> {{ forloop.counter }}</td>
+                        <td> <img src="{% if student.photo %}
+                                           {{ student.photo.url }}
+                                       {% else %}
+                                           {% static 'img/No_image_available.svg' %}
+                                       {% endif %}" height="75"></td>
+                        <td> {{ student.first_name }}</td>
+                        <td> {{ student.last_name|default:"Отчество отсутствует" }} </td>
+                        <td> {{ student.birthday }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 {% endblock container %}
 
 

@@ -110,3 +110,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_URL = '/photos/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+SERVE_MEDIA = DEBUG

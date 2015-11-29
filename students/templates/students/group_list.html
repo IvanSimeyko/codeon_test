@@ -34,7 +34,7 @@
                   <tr>
                       <td>{{ forloop.counter }}</td>
 
-                      <td><a href='#'> {{ group.title }} </a></td>
+                      <td><a href='{% url 'group:description_group' group.id %}'> {{ group.title }} </a></td>
 
                       <td> {{ group.starosta }} </td>
 

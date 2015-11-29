@@ -81,5 +81,5 @@ class GroupDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
         group = self.get_object()
-        context['student'] = group.student_set.all()
+        context['students'] = group.student_set.all()
         return context

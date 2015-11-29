@@ -2,7 +2,6 @@
 
 {% block nav_class_index %} active {% endblock %}
 
-
 {% load staticfiles %}
 
 {% block container %}
@@ -17,33 +16,48 @@
         </ul>
     {% endif %}
 
-{% comment %}    {% for article in articles %}
+    <table class="table table-bordered">
+          <h2 class="text-center"> Список групп в нашей академии! </h2>
 
-        <div class="well">
-            <h6> Дата публикации: {{ article.article_date|date:"d N Y" }} </h6>
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Группа</th>
+                  <th>Староста</th>
+                  <th>Редактировать группу</th>
+                  <th>Удалить группу</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for group in groups %}
+                  <tr>
+                      <td>{{ forloop.counter }}</td>
 
-            <h3>{{ article.article_title }}</h3>
+                      <td><a href='#'> {{ group.title }} </a></td>
 
-            <div class="tags"> <span class="glyphicon glyphicon-tags"></span>
-                {% for tag in article.article_tags.all %} <!-- делаем проход по нашим тегам -->
-                    <a href="{% url 'tag' tag.id %}"> {{ tag }} </a> <!-- выводим их на экран -->
-                            <!-- ставим между тегами запятые -->
-                    {% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </div>
-            <p>{{ article.article_short_description|markdown }}</p>
-            <p>
-                <a href="{% url 'articles:add_like' article.id %}">
-                    <img class="pull-left" src="{% static 'img/likes.jpg' %}" width="17" height="17">
-                </a>
-                <small> {{ article.article_likes }} </small>
+                      <td> {{ group.starosta }} </td>
 
-                <a class="btn btn-primary pull-right" href="{% url 'articles:article_detail' article.id %}" role="button">
-                    Read more...</a>
-            </p>
-        </div>
-    {% endfor %}
-    {% endcomment %}
+                      <td>
+                            <a class="btn btn-primary active" href="#" role="button">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                  редактировать группу
+                            </a>
+                      </td>
+
+                       <td>
+                           <a class="btn btn-primary active" href="#" role="button">
+                           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                          удалить группу
+                            </a>
+                       </td>
+                  </tr>
+              {% empty%}
+                  <tr>
+                      <td>Идет формирование списка курсов. Просим извенения за некоторые неудобства</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
 
     <div class="pagination pagination-lg">
         <span class="step-links">
@@ -63,10 +77,6 @@
                 <a href="?page={{ page_obj.next_page_number }}">next</a>
             {% endif %}
         </span>
-    </div>
-
-    <div class="well-sm">
-    <p> Test test test </p>
     </div>
 
 {% endblock container %}

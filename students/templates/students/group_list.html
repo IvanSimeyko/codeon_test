@@ -62,6 +62,14 @@
           </tbody>
       </table>
 
+
+    <div class="left">
+        <a class="btn btn-primary btn-sm" href="{% url 'group:add_group' %}" role="button">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                 Добавить группу
+        </a>
+    </div>
+
     <div class="pagination pagination-lg">
         <span class="step-links">
             {% if page_obj.has_previous %}

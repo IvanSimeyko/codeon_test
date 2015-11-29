@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block title %} Удаление группы {% endblock title %}
+
+
+{% block container %}
+
+
+    <h2 class="text-left"> Delete {{ group.title }} </h2>
+
+        <form method="post" >
+            {% csrf_token %}
+
+            <div>
+                <input class="btn btn-primary btn-sm" type="Submit" value="Удалить">
+            </div>
+
+        </form>
+
+
+{% endblock container %}

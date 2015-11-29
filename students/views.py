@@ -3,7 +3,7 @@
 from django.shortcuts import render
 from models import Group, Student
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView, CreateView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django import forms
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
@@ -60,3 +60,13 @@ class GroupCreateView(CreateView):
         context = super(GroupCreateView, self).get_context_data(**kwargs)
         context['page_title'] = u'Создание новой группы'
         return context
+
+
+class GroupDeleteView(DeleteView):
+    model = Group
+    success_url = reverse_lazy('group_list')
+
+    def delete(self, request, *args, **kwargs):
+        response = super(GroupDeleteView, self).delete(request, *args, **kwargs)
+        messages.warning(request, u"Группа %s была успешно удалена" % self.object.title)
+        return response

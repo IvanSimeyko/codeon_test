@@ -24,6 +24,7 @@
                   <th>#</th>
                   <th>Группа</th>
                   <th>Староста</th>
+                  <th> Характеристика группы </th>
                   <th>Редактировать группу</th>
                   <th>Удалить группу</th>
               </tr>
@@ -37,8 +38,10 @@
 
                       <td> {{ group.starosta }} </td>
 
+                      <td> {{ group.notes }} </td>
+
                       <td>
-                            <a class="btn btn-primary active" href="#" role="button">
+                            <a class="btn btn-primary active" href="{% url 'group:edit_group' group.id %}" role="button">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                   редактировать группу
                             </a>

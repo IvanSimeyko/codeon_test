@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Edit_group {% endblock title %}
+
+
+{% block container %}
+
+    <h2 class="text-center"> {% block name_table %} Редактирование группы {% endblock name_table %} </h2>
+
+    <div class="container">
+        <div class="container-fluid">
+            <form method="post">
+                <div class="form-control-static">
+                    {% csrf_token %}
+
+                    <table class="table table-responsive">
+                        {{ form.as_table }}
+                    </table>
+
+                    <div class="col-sm-offset-5 col-sm-7">
+                        <input class="btn btn-primary btn-sm" type="Submit" value="Редактировать">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock container %}

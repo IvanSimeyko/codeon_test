@@ -4,6 +4,7 @@ from django.shortcuts import render
 from models import Group, Student
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic.detail import DetailView
 from django import forms
 from django.core.urlresolvers import reverse_lazy
 from django.contrib import messages
@@ -70,3 +71,15 @@ class GroupDeleteView(DeleteView):
         response = super(GroupDeleteView, self).delete(request, *args, **kwargs)
         messages.warning(request, u"Группа %s была успешно удалена" % self.object.title)
         return response
+
+
+class GroupDetailView(DetailView):
+    model = Group
+    template_name = 'students/group_detail.html'
+    #context_object_name = 'course'
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
+        group = self.get_object()
+        context['student'] = group.student_set.all()
+        return context

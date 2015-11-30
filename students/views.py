@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from models import Group, Student
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
@@ -83,3 +83,23 @@ class GroupDetailView(DetailView):
         group = self.get_object()
         context['students'] = group.student_set.all()
         return context
+
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = '__all__'
+
+
+def add_student(request, pk):
+    if request.POST:
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            new_student = form.save()
+            messages.success(request, u"Студент %s успешно добавлен" % new_student.first_name)
+            return redirect('group:description_group', pk)
+    else:
+        group = Student.objects.get(pk=pk)
+        form = StudentForm(initial={'student_group': group})
+        page_title = u'Создание нового студента'
+    return render(request, 'students/group_form.html', {'form': form, 'page_title': page_title})

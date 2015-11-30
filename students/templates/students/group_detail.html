@@ -33,7 +33,7 @@
 
             <h2 class="text-center"> Студенты курса {{ group.title }}</h2>
 
-            <a class="btn btn-primary btn-sm" href="#" role="button">
+            <a class="btn btn-primary btn-sm" href="{% url 'group:add_student' group.id %}" role="button">
                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                        Добавить студента
             </a>
@@ -57,7 +57,7 @@
                                        {% else %}
                                            {% static 'img/No_image_available.svg' %}
                                        {% endif %}" height="75"></td>
-                        <td> {{ student.first_name }}</td>
+                        <td> <a href='#'> {{ student.first_name }} </a></td>
                         <td> {{ student.last_name|default:"Отчество отсутствует" }} </td>
                         <td> {{ student.birthday }} </td>
                     </tr>

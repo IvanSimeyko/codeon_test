@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('students.urls')),
     url(r'^group/', include('students.urls', namespace="group")),
+    url(r'^student/', include('students.urls_student', namespace="student")),
 ]
 
 

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+{% load staticfiles %}
+
+
+{% block title %} {{ group.title }} {% endblock title %}
+
+
+{% block container %}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} >
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2 class = 'text-center'>Данные студента {{ student.first_name }} {{ student.last_name }}</h2>
+    <img  src="{% if student.photo %}
+                   {{ student.photo.url }}
+               {% else %}
+                   {% static 'img/No_image_available.svg' %}
+               {% endif %}" height="300" hspace="25" vspace="5" align="left"> </td>
+
+    <div class="container-fluid">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td>Имя</td>
+              <td> {{ student.first_name }} <td>
+            </tr>
+            <tr>
+              <td>Фамилия</td>
+              <td>{{ student.last_name }}</td>
+            </tr>
+            <tr>
+              <td>Отчество</td>
+              <td>{{ student.middle_name|default:"Отчество отсутствует" }}</td>
+            </tr>
+            <tr>
+              <td>День рождения</td>
+              <td> {{ student.birthday }} </td>
+            </tr>
+            <tr>
+              <td>Номер билета</td>
+              <td> {{ student.ticket }} </td>
+            </tr>
+            <tr>
+              <td>Характеристика</td>
+              <td> {{ student.notes|default:"Характеристика отсутствует" }} </td>
+            </tr>
+            <tr>
+              <td>Группа (староста группы)</td>
+              <td> {{ student.student_group }} </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+             <p>
+                 <a class="btn btn-primary btn-sm" href="№" role="button">
+                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                       Редактировать данные
+            </a>
+            <a class=" pull-right  btn-primary btn-sm" href=№ role="button">
+                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                       Удалить данные
+            </a>
+             </p>
+    </div>
+
+{% endblock container %}

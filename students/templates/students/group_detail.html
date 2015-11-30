@@ -45,6 +45,7 @@
                     <th> Имя </th>
                     <th> Фамилия </th>
                     <th> Дата рождения </th>
+                    <th> Данные студента </th>
                 </tr>
             </thead>
 
@@ -52,14 +53,20 @@
                 {% for student in students %}
                     <tr>
                         <td> {{ forloop.counter }}</td>
-                        <td> <img src="{% if student.photo %}
+
+                        <td> <img class="img-circle" src="{% if student.photo %}
                                            {{ student.photo.url }}
                                        {% else %}
                                            {% static 'img/No_image_available.svg' %}
                                        {% endif %}" height="75"></td>
-                        <td> <a href='#'> {{ student.first_name }} </a></td>
-                        <td> {{ student.last_name|default:"Отчество отсутствует" }} </td>
+
+                        <td> {{ student.first_name }} </td>
+
+                        <td> {{ student.last_name|default:"Фамилия отсутствует" }} </td>
+
                         <td> {{ student.birthday }} </td>
+
+                        <td> <span class="text-center"><a href='{% url 'student:description_student' student.id %}'>Посмотреть...</a></span></td>
                     </tr>
                 {% endfor %}
             </tbody>

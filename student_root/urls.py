@@ -1,6 +1,7 @@
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 import settings
+from students import views
 
 urlpatterns = [
     # Examples:
@@ -8,7 +9,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('students.urls')),
+    url(r'^$', views.GroupListView.as_view(), name='group_list'),
     url(r'^group/', include('students.urls', namespace="group")),
     url(r'^student/', include('students.urls_student', namespace="student")),
 ]

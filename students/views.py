@@ -23,7 +23,7 @@ class GroupListView(ListView):
     """Groups List"""
     #queryset = Group.objects.all()
     model = Group
-    paginate_by = 3
+    paginate_by = 1
     context_object_name = 'groups'
 
 
@@ -81,6 +81,7 @@ class GroupDeleteView(DeleteView):
 class GroupDetailView(DetailView):
     model = Group
     template_name = 'students/group_detail.html'
+    paginate_by = 3
     #context_object_name = 'course'
 
     def get_context_data(self, **kwargs):

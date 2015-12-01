@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+{% load staticfiles %}
+
+
+{% block title %} {{ group.title }} {% endblock title %}
+
+
+{% block container %}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} >
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+
+    <div class="container-fluid">
+        <div class="well">
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+
+                    <h2 class="text-center"> Наши студенты</h2>
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th> Фото </th>
+                            <th> Имя </th>
+                            <th> Фамилия </th>
+                            <th> Дата рождения </th>
+                            <th> Данные студента </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for student in students %}
+                            <tr>
+                                <td> {{ forloop.counter }}</td>
+
+                                <td> <img class="img-circle" src="{% if student.photo %}
+                                                   {{ student.photo.url }}
+                                               {% else %}
+                                                   {% static 'img/No_image_available.svg' %}
+                                               {% endif %}" height="75"></td>
+
+                                <td> {{ student.first_name }} </td>
+
+                                <td> {{ student.last_name|default:"Фамилия отсутствует" }} </td>
+
+                                <td> {{ student.birthday }} </td>
+
+                                <td> <span class="text-center"><a href='{% url 'student:description_student' student.id %}'>Посмотреть...</a></span></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="pagination pagination-lg">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"> previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if num == page_obj.number %}
+                   <span class="current"><b>{{ num }}</b></span>
+                {% else %}
+                    <a href="?page={{ num }}"> {{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+
+{% endblock container %}

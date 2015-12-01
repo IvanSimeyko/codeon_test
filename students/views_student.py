@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
-
+from django.views.generic.list import ListView
 
 class StudentDetailView(DetailView):
     model = Student
@@ -52,3 +52,10 @@ class StudentDeleteView(DeleteView):
         context = super(StudentDeleteView, self).get_context_data(**kwargs)
         context['page_title'] = u'Удаление данных о студенте %s %s' % (self.object.first_name, self.object.last_name)
         return context
+
+
+class StudentListView(ListView):
+    model = Student
+    paginate_by = 5
+    #template_name = 'students/group_detail.html'
+    context_object_name = 'students'

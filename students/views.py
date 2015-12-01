@@ -72,6 +72,11 @@ class GroupDeleteView(DeleteView):
         messages.warning(request, u"Группа %s была успешно удалена" % self.object.title)
         return response
 
+    def get_context_data(self, **kwargs):
+        context = super(GroupDeleteView, self).get_context_data(**kwargs)
+        context['page_title'] = u'Удаление данных о группе %s' % self.object.title
+        return context
+
 
 class GroupDetailView(DetailView):
     model = Group

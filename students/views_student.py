@@ -36,3 +36,19 @@ class StudentUpdateView(UpdateView):
         context = super(StudentUpdateView, self).get_context_data(**kwargs)
         context['page_title'] = u'Редактирование данных студента'
         return context
+
+
+class StudentDeleteView(DeleteView):
+    model = Student
+    success_url = reverse_lazy('group_list')
+    template_name = 'students/group_confirm_delete.html'
+
+    def delete(self, request, *args, **kwargs):
+        response = super(StudentDeleteView, self).delete(request, *args, **kwargs)
+        messages.warning(request, u"Студент %s был успешно удален" % self.object.first_name)
+        return response
+
+    def get_context_data(self, **kwargs):
+        context = super(StudentDeleteView, self).get_context_data(**kwargs)
+        context['page_title'] = u'Удаление данных о студенте %s %s' % (self.object.first_name, self.object.last_name)
+        return context

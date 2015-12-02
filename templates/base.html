@@ -38,8 +38,17 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav nav-pills pull-left">
                     <li class="{% block nav_class_index %}{% endblock %}"><a href="{% url 'group_list' %}">Главная</a></li>
-                    <li class="{% block nav_class_engineering %}{% endblock %}"><a href='{% url 'student:all_student'%}'>Студенты</a></li>
+                    <li class="{% block nav_class_students %}{% endblock %}"><a href='{% url 'student:all_student'%}'>Студенты</a></li>
                     <li class="{% block nav_class_contact %}{% endblock %}"><a href="#">Контакты</a></li>
+                </ul>
+
+                <ul class="nav nav-pills pull-right">
+                    {% if user.username %}
+                        <li><a href="#' %}"> Выйти {{ user.username }}</a></li>
+                    {% else %}
+                        <li><a href="#"> Войти </a></li>
+                        <li><a href="#"> Зарегистрироваться </a></li>
+                    {% endif %}
                 </ul>
 
             </div><!--/.nav-collapse -->

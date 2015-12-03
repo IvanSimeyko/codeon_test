@@ -57,7 +57,7 @@ ROOT_URLCONF = 'student_root.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), 'loginsys/templates/loginsys'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

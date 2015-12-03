@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', views.GroupListView.as_view(), name='group_list'),
     url(r'^group/', include('students.urls', namespace="group")),
     url(r'^student/', include('students.urls_student', namespace="student")),
+    url(r'^auth/', include('loginsys.urls', namespace="loginsys")),
 ]
 
 

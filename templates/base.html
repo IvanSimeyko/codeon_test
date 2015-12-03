@@ -44,10 +44,10 @@
 
                 <ul class="nav nav-pills pull-right">
                     {% if user.username %}
-                        <li><a href="#' %}"> Выйти {{ user.username }}</a></li>
+                        <li><a href="{% url 'loginsys:log_out' %}"> Выйти {{ user.username }}</a></li>
                     {% else %}
-                        <li><a href="#"> Войти </a></li>
-                        <li><a href="#"> Зарегистрироваться </a></li>
+                        <li><a href="{% url 'loginsys:log_in' %}"> Войти </a></li>
+                        <li><a href="{% url 'loginsys:register' %}"> Зарегистрироваться </a></li>
                     {% endif %}
                 </ul>
 

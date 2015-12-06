@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^group/', include('students.urls', namespace="group")),
     url(r'^student/', include('students.urls_student', namespace="student")),
     url(r'^auth/', include('loginsys.urls', namespace="loginsys")),
+    url(r'^contact/', include('contacts.urls', namespace="contacts")),
 ]
 
 

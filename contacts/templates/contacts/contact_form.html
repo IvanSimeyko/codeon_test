@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {{ page_title }} {% endblock title %}
+
+
+{% block nav_class_contact %} active {% endblock %}
+
+
+{% block container %}
+
+    <h4> {{ page_title }} </h4>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                     {{ message }}
+                </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post">
+        <div class="form-control-static">
+            {% csrf_token %}
+
+            <table class="table table-responsive">
+                {{ form.as_table }}
+            </table>
+
+            <div class="col-sm-offset-5 col-sm-7">
+                <input class="btn btn-primary btn-sm" type="Submit" value="Отправить">
+            </div>
+        </div>
+
+    </form>
+
+{% endblock container %}

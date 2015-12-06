@@ -42,7 +42,7 @@
                 <ul class="nav nav-pills pull-left">
                     <li class="{% block nav_class_index %}{% endblock %}"><a href="{% url 'group_list' %}">Главная</a></li>
                     <li class="{% block nav_class_students %}{% endblock %}"><a href='{% url 'student:all_student'%}'>Студенты</a></li>
-                    <li class="{% block nav_class_contact %}{% endblock %}"><a href="#">Контакты</a></li>
+                    <li class="{% block nav_class_contact %}{% endblock %}"><a href="{% url 'contacts:create_contact' %}">Наши контакты</a></li>
                 </ul>
 
                 <ul class="nav nav-pills pull-right">

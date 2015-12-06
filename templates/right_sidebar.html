@@ -1,0 +1,21 @@
+{% load staticfiles %}
+
+
+    <div class="well">
+        <h5> <strong> Наши группы </strong></h5>
+        {% for group in groups %}
+            <a href="{% url 'group:description_group' group.id %}"> {{ group.title }} </a>
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+     <hr>
+
+    <div class="well">
+        <h5> <strong> Наши студенты: </strong></h5>
+        {% for student in students %}
+            <p>
+                <a href="{% url 'student:description_student' student.id %}"> {{ student.first_name }} {{ student.last_name }} </a>
+            </p>
+        {% endfor %}
+    </div>
+

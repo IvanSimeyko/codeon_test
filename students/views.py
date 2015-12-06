@@ -23,7 +23,7 @@ class GroupListView(ListView):
     """Groups List"""
     #queryset = Group.objects.all()
     model = Group
-    paginate_by = 1
+    #paginate_by = 1
     context_object_name = 'groups'
 
 

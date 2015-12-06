@@ -16,6 +16,9 @@
         {% load staticfiles %}
         <link href="{% static 'bootstrap/css/bootstrap.css' %}" rel="stylesheet">
 
+        {% load sidebar %}
+
+
         <!-- Custom styles for this template -->
         <link href="starter-template.css" rel="stylesheet">
 
@@ -62,13 +65,11 @@
                     {% block container %}
 
                     {% endblock container %}
-
-
                 </div>
 
                 <div class="col-sm-3 blog-main">
                     {% block container_right %}
-
+                         {% show_sidebar %}
                     {% endblock container_right %}
 
                 </div>

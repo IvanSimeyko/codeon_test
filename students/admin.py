@@ -10,10 +10,17 @@ class StudentAdmin(admin.ModelAdmin):
     #filter_horizontal = ('student_group',)
 
 
+class StudentInline(admin.TabularInline):
+    model = Student
+
+
 class GroupAdmin(admin.ModelAdmin):
     list_display = ['title', 'starosta']
     search_fields = ['title', 'starosta']
     list_filter = ['title', 'starosta']
+    inlines = [ StudentInline, ]
+
+
 
 
 admin.site.register(Student, StudentAdmin)
